@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8"/>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+    <title>Citizen Feedback on Road Maintenance</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&amp;display=swap" rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet"/>
+    <style type="text/tailwindcss">
+        @tailwind base;
+        @tailwind components;
+        @tailwind utilities;
+        /* This CSS rule shows the 'Other Issue' input only when 'Other Issues' is selected */
+        #other-issue-container {
+            display: none;
+        }
+        #issue-type:has(option[value="Other Issues"]:checked) ~ #other-issue-container {
+            display: block;
+        }
+    </style>
+    <script>
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        primary: "#1D4ED8",
+                        "background-light": "#F9FAFB",
+                        "background-dark": "#111827",
+                        "card-light": "#FFFFFF",
+                        "card-dark": "#1F2937",
+                        "text-light": "#1F2937",
+                        "text-dark": "#F9FAFB",
+                        "text-secondary-light": "#6B7280",
+                        "text-secondary-dark": "#9CA3AF",
+                        "border-light": "#E5E7EB",
+                        "border-dark": "#374151"
+                    },
+                    fontFamily: {
+                        display: ["Roboto", "sans-serif"],
+                    },
+                    borderRadius: {
+                        DEFAULT: "0.5rem",
+                    },
+                },
+            },
+        };
+    </script>
+</head>
+<body class="bg-background-light dark:bg-background-dark font-display text-text-light dark:text-text-dark">
+<div class="min-h-screen flex flex-col">
+    <header class="bg-card-light dark:bg-card-dark shadow-md">
+        <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-16">
+                <div class="flex items-center">
+                    <span class="material-icons text-primary text-3xl">add_road</span>
+                    <h1 class="text-xl font-bold ml-2 text-text-light dark:text-text-dark">FixMyRoad</h1>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main class="flex-grow container mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        <div class="max-w-4xl mx-auto">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl font-bold tracking-tight text-text-light dark:text-text-dark sm:text-4xl">Be a First Responder for Your Roads</h2>
+                <p class="mt-4 text-lg text-text-secondary-light dark:text-text-secondary-dark">
+                    Roadside structures are almost impossible to keep in perfect condition due to constant wear and tear. Often early maintenance efforts can help in maintain its condition for a longer time which is possible if citizens become first responders.
+                </p>
+            </div>
+            <div class="bg-card-light dark:bg-card-dark rounded-lg shadow-lg p-6 sm:p-8">
+                <h3 class="text-xl font-semibold mb-6 text-text-light dark:text-text-dark">Citizen Feedback Form</h3>
+                <form action="thankyou.html" class="space-y-6" method="GET">
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                        <div>
+                            <label class="block text-sm font-medium text-text-secondary-light dark:text-text-secondary-dark" for="name">Full Name</label>
+                            <div class="mt-1">
+                                <input class="block w-full px-3 py-2 border border-border-light dark:border-border-dark rounded-md shadow-sm bg-background-light dark:bg-background-dark focus:ring-primary focus:border-primary sm:text-sm" id="name" name="name" placeholder="Your Name" type="text" required/>
+                            </div>
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium text-text-secondary-light dark:text-text-secondary-dark" for="email">Email Address</label>
+                            <div class="mt-1">
+                                <input class="block w-full px-3 py-2 border border-border-light dark:border-border-dark rounded-md shadow-sm bg-background-light dark:bg-background-dark focus:ring-primary focus:border-primary sm:text-sm" id="email" name="email" placeholder="you@example.com" type="email"/>
+                            </div>
+                        </div>
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium text-text-secondary-light dark:text-text-secondary-dark" for="location">Location</label>
+                        <div class="mt-1 relative rounded-md shadow-sm">
+                            <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                                <span class="material-icons text-gray-400">location_on</span>
+                            </div>
+                            <input class="block w-full pl-10 pr-12 py-2 border border-border-light dark:border-border-dark rounded-md bg-background-light dark:bg-background-dark focus:ring-primary focus:border-primary sm:text-sm" id="location-input" name="location" placeholder="Enter street address or drop a pin" type="text"/>
+                            <div class="absolute inset-y-0 right-0 flex items-center">
+                                <button class="inline-flex items-center px-3 py-2 border-l border-border-light dark:border-border-dark text-primary font-medium rounded-r-md hover:bg-gray-50 dark:hover:bg-gray-700" id="get-location-btn" type="button">
+                                    <span class="material-icons text-base">my_location</span>
+                                    <span class="hidden sm:inline ml-1">Use Current</span>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium text-text-secondary-light dark:text-text-secondary-dark" for="issue-type">Type of Issue</label>
+                        <select class="mt-1 block w-full pl-3 pr-10 py-2 text-base border-border-light dark:border-border-dark bg-background-light dark:bg-background-dark focus:outline-none focus:ring-primary focus:border-primary sm:text-sm rounded-md" id="issue-type" name="issue-type">
+                            <option>Pothole</option>
+                            <option>Cracked Pavement</option>
+                            <option>Faded Road Markings</option>
+                            <option>Damaged Signage</option>
+                            <option>Streetlight Outage</option>
+                            <option>Poor Drainage</option>
+                            <option value="Other Issues">Other Issues</option>
+                        </select>
+                    </div>
+                    <div class="mt-6" id="other-issue-container">
+                        <label class="block text-sm font-medium text-text-secondary-light dark:text-text-secondary-dark" for="other-issue">Please specify other issue</label>
+                        <div class="mt-1">
+                            <input class="block w-full px-3 py-2 border border-border-light dark:border-border-dark rounded-md shadow-sm bg-background-light dark:bg-background-dark focus:ring-primary focus:border-primary sm:text-sm" id="other-issue" name="other-issue" placeholder="Describe the issue in detail" type="text"/>
+                        </div>
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium text-text-secondary-light dark:text-text-secondary-dark" for="description">Description</label>
+                        <div class="mt-1">
+                            <textarea class="block w-full shadow-sm sm:text-sm border border-border-light dark:border-border-dark rounded-md bg-background-light dark:bg-background-dark focus:ring-primary focus:border-primary" id="description" name="description" placeholder="Provide a brief description of the issue..." rows="4"></textarea>
+                        </div>
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium text-text-secondary-light dark:text-text-secondary-dark">Upload Photos (up to 3)</label>
+                        <div class="mt-1 flex justify-center px-6 pt-5 pb-6 border-2 border-border-light dark:border-border-dark border-dashed rounded-md">
+                            <div class="space-y-1 text-center">
+                                <span class="material-icons text-5xl text-gray-400">cloud_upload</span>
+                                <div class="flex text-sm text-gray-600 dark:text-gray-400">
+                                    <label class="relative cursor-pointer bg-card-light dark:bg-card-dark rounded-md font-medium text-primary hover:text-blue-700 focus-within:outline-none focus-within:ring-2 focus-within:ring-offset-2 focus-within:ring-primary" for="file-upload">
+                                        <span>Upload a file</span>
+                                        <input accept="image/png, image/jpeg" class="sr-only" id="file-upload" multiple name="file-upload[]" type="file"/>
+                                    </label>
+                                    <p class="pl-1">or drag and drop</p>
+                                </div>
+                                <p class="text-xs text-gray-500 dark:text-gray-400">PNG, JPG up to 5MB each</p>
+                            </div>
+                        </div>
+                        <div class="mt-4 grid grid-cols-1 sm:grid-cols-3 gap-4" id="image-preview-container"></div>
+                    </div>
+                    <div class="flex justify-end pt-4">
+                        <button class="inline-flex items-center justify-center px-6 py-3 border border-transparent text-base font-medium rounded-md shadow-sm text-white bg-primary hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary" type="submit">
+                            Submit Report
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </main>
+
+    <footer class="bg-card-light dark:bg-card-dark">
+        <div class="container mx-auto py-4 px-4 sm:px-6 lg:px-8">
+            <p class="text-center text-sm text-text-secondary-light dark:text-text-secondary-dark">© 2025 FixMyRoad. All rights reserved.</p>
+        </div>
+    </footer>
+</div>
+
+<script src="/Fix-My-Road/Frontend/form.js"></script>
+
+</body>
+</html>
